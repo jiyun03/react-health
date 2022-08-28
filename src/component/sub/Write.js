@@ -1,8 +1,9 @@
 import React from 'react'
+import Layout from "../common/Layout"
 
 function Write() {
   return (
-    <div>Write</div>
+    <Layout>Write</Layout>
   )
 }
 

@@ -1,8 +1,9 @@
 import React from 'react'
+import Layout from "../common/Layout"
 
 function Main() {
   return (
-    <div>Main</div>
+    <Layout>Main</Layout>
   )
 }
 

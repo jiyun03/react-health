@@ -15,7 +15,7 @@ import "./scss/style.scss";
 function App() {
 	return (
 		<>
-			<Route exact path="/" render={() => <Header name="메인" type="header--main" />} />
+			<Route exact path="/" render={() => <Header name="나의 건강일지" type="header--main" />} />
 			<Route path="/list" render={() => <Header name="리스트" type="header--back" />} />
 			<Route path="/write" render={() => <Header name="작성" type="header--back" />} />
 

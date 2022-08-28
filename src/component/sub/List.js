@@ -1,8 +1,9 @@
 import React from 'react'
+import Layout from "../common/Layout"
 
 function List() {
   return (
-    <div>List</div>
+    <Layout>List</Layout>
   )
 }
 

@@ -1,7 +1,12 @@
+// breakpoint
 $mobile: 720px;
+
+// container
+$container: 20rem;
 
 //common
 @import "common/typography";
 @import "common/reset";
 @import "common/common";
 @import "common/header";
+@import "common/nav";

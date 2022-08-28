@@ -1,34 +1,39 @@
 import { NavLink } from "react-router-dom";
 
 function Nav() {
-  const active = { color: "#000" }
+  const active = { color: "#ff7e7e" }
 
   return (
     <nav className="nav">
-      <ul>
-        <li>
+      <ul className="nav__box">
+        <li className="nav__item">
           <NavLink activeStyle={active} to="/">
-            홈
+            <span className="nav__icon"></span>
+            <span className="nav__title">홈</span>
           </NavLink>
         </li>
-        <li>
+        <li className="nav__item">
           <NavLink activeStyle={active} to="/list">
-            리스트
+            <span className="nav__icon"></span>
+            <span className="nav__title">리스트</span>
           </NavLink>
         </li>
-        <li>
+        <li className="nav__item">
           <NavLink activeStyle={active} to="/write">
-            작성
+            <span className="nav__icon"></span>
+            <span className="nav__title">작성</span>
           </NavLink>
         </li>
-        <li>
-          <NavLink activeStyle={active} to="/">
-            미정
+        <li className="nav__item">
+          <NavLink activeStyle={active} to="/calender">
+            <span className="nav__icon"></span>
+            <span className="nav__title">달력</span>
           </NavLink>
         </li>
-        <li>
-          <NavLink activeStyle={active} to="/">
-            설정
+        <li className="nav__item">
+          <NavLink activeStyle={active} to="/setting">
+            <span className="nav__icon"></span>
+            <span className="nav__title">설정</span>
           </NavLink>
         </li>
       </ul>

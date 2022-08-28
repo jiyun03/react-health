@@ -1,6 +1,7 @@
 html {
   background-color: #ebebeb;
 	font-family: 'Noto Sans KR';
+  font-weight: 400;
   font-size: 1px;
 }
 
@@ -10,4 +11,13 @@ body {
   margin-right: auto;
   background-color: #fff;
   font-size: 16rem;
+}
+
+.container {
+  padding-left: $container;
+  padding-right: $container;
+}
+
+.layout {
+  min-height: 100vh;
 }
