@@ -1,6 +1,22 @@
 .header {
+  &__inner {
+    display: flex;
+    align-items: center;
+  }
   &__logo {
     width: 60rem;
+  }
+  &__back {
+    width: 30rem;
+  }
+
+  // main {
+  &--main {
+    .header {
+      &__back {
+        display: none;
+      }
+    }
   }
 
   // back {
