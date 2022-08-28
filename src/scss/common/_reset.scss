@@ -1,0 +1,33 @@
+* {
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
+}
+
+ul,
+ol,
+li {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+fieldset {
+  border: none;
+}
+
+table {
+  border: none;
+  border-collapse: collapse;
+
+  th,
+  td {
+    border: none;
+  }
+}
+
+img {
+  max-width: 100%;
+}

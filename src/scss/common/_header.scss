@@ -1,0 +1,14 @@
+.header {
+  &__logo {
+    width: 60rem;
+  }
+
+  // back {
+  &--back {
+    .header {
+      &__logo {
+        display: none;
+      }
+    }
+  }
+}
