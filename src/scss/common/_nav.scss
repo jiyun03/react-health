@@ -12,8 +12,39 @@
     border-radius: 20px 20px 0 0;
     box-shadow: 0 -2px 5px rgba(0,0,0,0.1);
   }
+  a {
+    display: block;
+    padding: 10rem 0;
+    font-size: 0;
+    span {
+      display: block;
+    }
+  }
   &__item {
     flex: 1;
     text-align: center;
+  }
+  &__icon {
+    height: 20rem;
+    margin: auto;
+    &--active {
+      display: none;
+    }
+  }
+  &__title {
+    margin-top: 5rem;
+    font-size: 12rem;
+  }
+  
+  // active
+  .active {
+    .nav {
+      &__icon {
+        display: none;
+        &--active {
+          display: block;
+        }
+      }
+    }
   }
 }
