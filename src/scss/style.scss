@@ -4,9 +4,34 @@ $mobile: 720px;
 // container
 $container: 20rem;
 
+// color
+// Blue
+$bgBlue: #edf8fe;
+$tagBlue: #49b8ff;
+$circleBlue: #d4ebfe;
+$circleBlueDeep: #71afe3;
+// Pink
+$bgPink: #fff1f0;
+$tagPink: #f93d6e;
+$circlePink: #fed4d4;
+$circlePinkDeep: #ff6b92;
+// Green
+$bgGreen: #edfef2;
+$tagGreen: #69d058;
+$circleGreen: #dbfed4;
+$circleGreenDeep: #b1e371;
+// Gray
+$bgSlideNav: #a2a2a2;
+$bgSlideNavActive: #3d3d3d;
+
+
 //common
 @import "common/typography";
 @import "common/reset";
 @import "common/common";
 @import "common/header";
 @import "common/nav";
+
+//main
+@import "main/slide";
+@import "main/gate";

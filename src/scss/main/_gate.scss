@@ -1,0 +1,109 @@
+.gate {
+  margin-top: 30rem;
+  &__title {
+    margin-bottom: 10rem;
+    font-size: 18rem;
+    font-weight: 700;
+  }
+  // GateItem
+  &-item {
+    &__item {
+      &:not(:last-child) {
+        margin-bottom: 20rem;
+      }
+      a {
+        display: block;
+        position: relative;
+        background-color: #fff;
+        border-radius: 20rem;
+        min-height: 120rem;
+        overflow: hidden;
+        background-color: $bgBlue;
+        &:before,
+        &:after {
+          content: '';
+          position: absolute;
+          bottom: -35rem;
+          right: -15rem;
+          width: 100rem;
+          height: 100rem;
+          border-radius: 50%;
+          background-color: $circleBlue;
+        }
+        &:after {
+          bottom: 47rem;
+          right: -16rem;
+          width: 45rem;
+          height: 45rem;
+          background-color: $circleBlueDeep;
+        }
+      }
+    }
+    &__tag {
+      display: inline-block;
+      position: absolute;
+      left: 0;
+      top: 0;
+      background-color: $tagBlue;
+      color: #fff;
+      font-size: 12rem;
+      font-weight: 600;
+      padding: 4rem 20rem;
+      border-radius: 0 0 20rem 0;
+    }
+    &__title {
+      font-size: 18rem;
+      font-weight: 700;
+      &-wrap {
+        padding: 35rem 20rem 0 20rem;
+      }
+    }
+    &__subtitle {
+      margin-top: 2rem;
+      font-size: 13rem;
+    }
+    &__img {
+      position: absolute;
+      right: 20rem;
+      top: 50%;
+      width: 85rem;
+      transform: translateY(-50%);
+      z-index: 1;
+    }
+
+    // pink
+    &__item.pink {
+      a {
+        background-color: $bgPink;
+        &:before {
+          background-color: $circlePink;
+        }
+        &:after {
+          background-color: $circlePinkDeep;
+        }
+      }
+      .gate-item {
+        &__tag {
+          background-color: $tagPink;
+        }
+      }
+    }
+    // green
+    &__item.green {
+      a {
+        background-color: $bgGreen;
+        &:before {
+          background-color: $circleGreen;
+        }
+        &:after {
+          background-color: $circleGreenDeep;
+        }
+      }
+      .gate-item {
+        &__tag {
+          background-color: $tagGreen;
+        }
+      }
+    }
+  }
+}

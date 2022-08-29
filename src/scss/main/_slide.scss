@@ -1,0 +1,36 @@
+.slide {
+  position: relative;
+  padding-top: 56.25%;
+  border-radius: 20rem;
+  overflow: hidden;
+  z-index: 1;
+  &__item {
+    position: absolute;
+    top: 0;
+    left: 100%;
+    width: 100%;
+    &:nth-child(1) {
+      left: 0;
+    }
+  }
+  &__nav {
+    width: 7rem;
+    height: 7rem;
+    background-color: $bgSlideNav;
+    border-radius: 50%;
+    &:not(:last-child) {
+      margin-right: 5rem;
+    }
+    &.s-active {
+      width: 20rem;
+      border-radius: 10rem;
+      background-color: $bgSlideNavActive;
+    }
+    &-wrap {
+      position: absolute;
+      right: 20rem;
+      bottom: 20rem;
+      display: flex;
+    }
+  }
+}
