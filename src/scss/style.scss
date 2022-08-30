@@ -25,13 +25,17 @@ $bgSlideNav: #a2a2a2;
 $bgSlideNavActive: #3d3d3d;
 
 
-//common
+// common
 @import "common/typography";
 @import "common/reset";
 @import "common/common";
 @import "common/header";
 @import "common/nav";
+@import "common/alert";
 
-//main
+// main
 @import "main/slide";
 @import "main/gate";
+
+// sub
+@import "sub/write";

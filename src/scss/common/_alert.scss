@@ -1,0 +1,45 @@
+.alert {
+  position: fixed;
+  top:  50%;
+  left: 50%;
+  width: 90%;
+  max-width: $mobile;
+  padding-bottom: 20rem;
+  text-align: center;
+  background-color: #fff;
+  border-radius: 20rem;
+  transform: translate(-50%, -50%);
+  z-index: 120;
+  overflow: hidden;
+  &__title {
+    font-size: 18rem;
+    font-weight: 600;
+    &-wrap {
+      border-top: 5px solid $tagPink;
+      border-radius: 20rem;
+      padding: 15rem 10rem;
+    }
+  }
+  &__content {
+    padding: 0 10rem;
+    font-size: 15rem;
+  }
+  &__btn {
+    display: inline-block;
+    padding: 10rem 20rem 9rem;
+    font-size: 14rem;
+    color: #fff;
+    border-radius: 30rem;
+    background-color: #373737;
+    &:not(:last-child) {
+      margin-right: 5rem;
+    }
+    &-wrap {
+      margin-top: 20rem;
+    }
+    // submit
+    &--submit {
+      background-color: $tagPink;
+    }
+  }
+}

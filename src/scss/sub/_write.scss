@@ -1,0 +1,143 @@
+.form {
+  &__item {
+    &:not(:last-child) {
+      margin-bottom: 15rem;
+    }
+    // 라디오
+    &--radio {
+      .form {
+        &__label {
+          &-wrap {
+            width: 100rem;
+          }
+        }
+      }
+    }
+  }
+  &__flex {
+    display: flex;
+  }
+  &__label {
+    font-size: 15rem;
+    font-weight: 500;
+    &-wrap {
+      margin-bottom: 5rem;
+    }
+  }
+  &__input {
+    display: inline-block;
+    padding: 0 10rem;
+    width: 100%;
+    height: 40rem;
+    font-family: 'Noto Sans KR';
+    font-size: 14rem;
+    background-color: #fff;
+    border: 1px solid #c8c8c8;
+    outline: none;
+    border-radius: 8rem;
+    &::placeholder {
+      color: #999;
+    }
+    &:focus,
+    &:active,
+    &:focus-visible {
+      border-color: #575757;
+    }
+    &-wrap {
+      &:not(:last-child) {
+        margin-bottom: 5rem;
+      }
+      // select
+      &--select {
+        position: relative;
+        &:before {
+          content: '';
+          position: absolute;
+          right: 10rem;
+          top: 50%;
+          width: 12rem;
+          height: 40rem;
+          background: url('../../assets/img/icon/down-arrow.png') no-repeat center;
+          background-size: 100%;
+          transform: translateY(-50%);
+          z-index: 1;
+        }
+      }
+    }
+    // date
+    &--date {
+      display: flex;
+      align-items: center;
+    }
+    // file
+    &--file {
+      padding: 0;
+      border: none;
+      border-radius: 0;
+      height: auto;
+    }
+  }
+  &__radio {
+    position: relative;
+    font-size: 14rem;
+    padding-left: 20rem;
+    &:not(:last-child) {
+      margin-right: 10rem;
+    }
+    input {
+      -webkit-appearance: none;
+      appearance: none;
+      background-color: #fff;
+      margin: 0;
+      margin-right: 4rem;
+      &:before,
+      &:after {
+        content: '';
+        display: block;
+        position: absolute;
+        left: 0;
+        top: 2px;
+        width: 17rem;
+        height: 17rem;
+        border-radius: 50%;
+      }
+      &:before {
+        background-color: #d8d8d8;
+      }
+      &:after {
+        transform: scale(0.4);
+        background-color:#fff;
+      }
+      &:checked {
+        &:before {
+          background-color:#ff6b92;
+        }
+      }
+    }
+  }
+  textarea {
+    height: auto;
+    padding: 10rem;
+    resize: none;
+  }
+  select {
+    position: relative;
+    padding-right: 32rem;
+    -o-appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+  }
+  &__btn {
+    display: block;
+    width: 100%;
+    padding: 15rem 10rem;
+    font-size: 16rem;
+    background-color: #ff7e7f;
+    border-radius: 25rem;
+    color: #fff;
+    &-wrap {
+      margin-top: 30rem;
+    }
+  }
+}
