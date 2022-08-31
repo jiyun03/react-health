@@ -71,7 +71,7 @@ function Write() {
   // firebase post 전송
   const createPost = () => {
     // 요일 계산
-    const week = new Array('일요일', '월요일', '화요일', '수요일', '목요일', '금요일', '토요일')
+    const week = ['일요일', '월요일', '화요일', '수요일', '목요일', '금요일', '토요일']
     const today = new Date(inputDate.current.value).getDay()
     const todayLabel = week[today]
 

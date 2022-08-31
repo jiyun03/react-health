@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { NavLink } from 'react-router-dom'
 
 import Layout from "../common/Layout"
@@ -8,11 +8,11 @@ import imgListsNone from "../../assets/img/icon/lists-none.png";
 
 function List() {
   const publicFolder = process.env.PUBLIC_URL
-  const [Years, setYears] = useState([]);
+  const [Years, setYears] = useState([])
 
   const fetchListsHandler = useCallback(async () => {
-    const response = await fetch('https://react-health-ef569-default-rtdb.firebaseio.com/healthList.json');
-    const data = await response.json();
+    const response = await fetch('https://react-health-ef569-default-rtdb.firebaseio.com/healthList.json')
+    const data = await response.json()
     if(data === null) return
     const dataSort = Object.fromEntries(
       Object.entries(data).sort(([a],[b]) => a > b? -1 : 1)
@@ -31,8 +31,8 @@ function List() {
   }, []);
 
   useEffect(() => {
-    fetchListsHandler();
-  }, [fetchListsHandler]);
+    fetchListsHandler()
+  }, [fetchListsHandler])
 
   return (
     <Layout className={Years.length === 0 && "layout--none"}>
@@ -80,7 +80,7 @@ function List() {
                         {listsArray.map((listsEach, listsIdx) => {
                           const date = listsEach.lists.date.substring(8)
                           return (
-                            <NavLink key={`lists${listsIdx}`} to={`/view/${listsEach.id}?year=${year}?month=${month}`} className="lists__list-item">
+                            <NavLink key={`lists${listsIdx}`} to={`/view/${listsEach.id}?year=${year}&month=${month}`} className="lists__list-item">
                               <div className="lists__date-wrap">
                                 <div className="lists__date lists__date--month">
                                   {month}.{date}
