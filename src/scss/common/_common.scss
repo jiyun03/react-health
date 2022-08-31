@@ -24,6 +24,8 @@ body {
 .layout {
   padding: 90rem 0 102.5rem;
   min-height: 100vh;
+
+  // main
   &--main {
     position: relative;
     &:before {
@@ -36,6 +38,13 @@ body {
       background-image: linear-gradient(135deg, #77e0ff, #95fd8f);
       border-radius: 0 0 25rem 25rem;
     }
+  }
+
+  // none
+  &--none {
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 }
 
