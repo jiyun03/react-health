@@ -1,0 +1,43 @@
+.setting {
+  margin-left: -$container;
+  margin-right: -$container;
+  &__title {
+    margin-bottom: 10rem;
+    padding: 0 $container;
+    font-size: 18rem;
+    font-weight: 600;
+    // content
+    &--content {
+      margin-bottom: 5rem;
+      font-weight: 500;
+      color: #1a1a1a;
+    }
+  }
+  &__box {
+    &:not(:last-child) {
+      border-bottom: 8rem solid #e9e9e9;
+    }
+    &:not(:first-child) {
+      margin-top: 10rem;
+    }
+    // content
+    &--content {
+      font-size: 14rem;
+      padding: 20rem $container 30rem;
+    }
+  }
+  &__item {
+    padding: 10rem $container;
+    font-size: 14rem;
+    cursor: pointer;
+    &:not(:last-child) {
+      border-bottom: 1px solid #e7e7e7;
+    }
+    // content
+    &--content {
+      font-size: 12rem;
+      font-weight: 300;
+      color: #858585;
+    }
+  }
+}
