@@ -2,15 +2,18 @@ import { useState, useEffect, useCallback } from 'react';
 import { NavLink } from 'react-router-dom'
 
 import Layout from "../common/Layout"
+import LoadingLayer from "../common/LoadingLayer"
 
 // 이미지
 import imgListsNone from "../../assets/img/icon/lists-none.png";
 
 function List() {
   const publicFolder = process.env.PUBLIC_URL
+  const [Loading, setLoading] = useState(true)
   const [Years, setYears] = useState([])
 
   const fetchListsHandler = useCallback(async () => {
+    let mounted = true
     const response = await fetch('https://react-health-ef569-default-rtdb.firebaseio.com/healthList.json')
     const data = await response.json()
     if(data === null) return
@@ -27,15 +30,29 @@ function List() {
         month: montSort
       })
     }
-    setYears(year)
+    if (mounted) {
+      setYears(year)
+    }
+    return () => {
+      mounted = false
+    }
   }, []);
 
   useEffect(() => {
     fetchListsHandler()
   }, [fetchListsHandler])
 
+  useEffect(() => {
+    if(Years.length === 0) {
+      setLoading(true)
+    }else {
+      setLoading(false)
+    }
+  }, [Years])
+
   return (
     <Layout className={Years.length === 0 && "layout--none"}>
+      {!Loading ?
       <div className="lists">
         {Years.length !== 0 ? Years.map((yearEach, yearIdx) => {
           const monthArray = []
@@ -90,7 +107,7 @@ function List() {
                                 </div>
                                 <div className="lists__icon-wrap">
                                   {listsEach.lists.medicine === "yes" && <img src={`${publicFolder}/assets/img/icon/medicine.png`} alt="약 아이콘" className="lists__icon" />}
-                                  {listsEach.lists.shot === "yes" && <img src={`${publicFolder}/assets/img/icon/shot.png`} alt="약 아이콘" className="lists__icon" />}
+                                  {listsEach.lists.shot === "yes" && <img src={`${publicFolder}/assets/img/icon/shot.png`} alt="주사 아이콘" className="lists__icon" />}
                                 </div>
                               </div>
                               <div className="lists__title-wrap">
@@ -120,7 +137,7 @@ function List() {
             일지를 작성해 보세요
           </div>
         </div>}
-      </div>
+      </div> : <LoadingLayer />}
     </Layout>
   )
 }

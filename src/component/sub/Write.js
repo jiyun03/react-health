@@ -1,16 +1,24 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState, useCallback } from 'react'
+import { useLocation } from 'react-router'
+import { disableBodyScroll, enableBodyScroll } from 'body-scroll-lock';
+
 import Layout from "../common/Layout"
 import Alert from "../common/Alert"
 import Dim from "../common/Dim"
-import { disableBodyScroll } from 'body-scroll-lock';
 
 function Write() {
+  const params = useLocation().search
+  const yearView = new URLSearchParams(params).get('year')
+  const monthView = new URLSearchParams(params).get('month')
+  const keyView = new URLSearchParams(params).get('key')
   const inputTitle = useRef('')
   const inputDate = useRef('')
   const inputContent = useRef('')
   const inputCategory = useRef('')
   const inputCategoryEtc = useRef('')
+  const radioMedicine = useRef('')
   const inputRadioMedicine = useRef('')
+  const radioShot = useRef('')
   const inputRadioShot = useRef('')
   // const inputFile = useRef('')
   const [SelectInput, setSelectInput] = useState(false)
@@ -34,11 +42,6 @@ function Write() {
       setRadioShot(e.target.value)
     }
   }
-
-  useEffect(() => {
-    const today = new Date().toISOString().substring(0, 10)
-    inputDate.current.value = today
-  }, [])
 
   // category
   const category = ["내과", "치과", "내분비과", "산부인과", "소아과", "정형외과", "이비인후과", "안과", "신경외과", "성형외과", "비뇨기과", "신경과", "정신의학과", "피부과", "재활의학과", "가정의학과", "기타"]
@@ -95,7 +98,18 @@ function Write() {
     }
     const listYear = healthList.date.slice(0, 4)
     const listMonth = healthList.date.slice(5, 7)
-    
+
+    if(!params) {
+      // 작성
+      createPostFetch(listYear, listMonth, healthList)
+    }else {
+      // 수정모드
+      editPut(listYear, listMonth, healthList, keyView)
+    }
+  }
+
+  // 생성
+  const createPostFetch = (listYear, listMonth, healthList) => {
     const response = fetch(`https://react-health-ef569-default-rtdb.firebaseio.com/healthList/year${listYear}/month${listMonth}.json`, {
       method: 'POST',
       body: JSON.stringify(healthList),
@@ -104,6 +118,74 @@ function Write() {
       }
     })
     return response
+  }
+
+  // 수정
+  const [EditState, setEditState] = useState({})
+
+  // 불러오기
+  const editView = useCallback(async () => {
+    if(params) {
+      const response = await fetch(`https://react-health-ef569-default-rtdb.firebaseio.com/healthList/year${yearView}/month${monthView}/${keyView}.json`)
+      const data = await response.json()
+      setEditState(data)
+    }else {
+      setEditState({})
+    }
+  }, [params, yearView, monthView, keyView])
+
+  const editPut = (listYear, listMonth, healthList, keyView) => {
+    const response = fetch(`https://react-health-ef569-default-rtdb.firebaseio.com/healthList/year${listYear}/month${listMonth}/${keyView}.json`, {
+      method: "PUT",
+      body: JSON.stringify(healthList),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+    return response
+  }
+
+  useEffect(() => {
+    editView()
+  }, [params, editView])
+
+  useEffect(() => {
+    const today = new Date().toISOString().substring(0, 10)
+
+    // date
+    if(EditState.date !== undefined || today !== undefined) {
+      if(EditState.date !== undefined) {
+        inputDate.current.value = EditState.date
+      } else {
+        inputDate.current.value = today
+      }
+    }
+    // inputCategory
+    if(EditState.category !== undefined) {
+      inputCategory.current.value = EditState.category
+    }else {
+      inputCategory.current.value = category[0]
+    }
+    
+    // radioMedicine
+    if(EditState.medicine === "yes") {
+      setRadioMedicine("yes")
+    }else {
+      setRadioMedicine("no")
+    }
+    // radioShot
+    if(EditState.shot === "yes") {
+      setRadioShot("yes")
+    }else {
+      setRadioShot("no")
+    }
+  }, [EditState])
+
+  // alert 함수
+  const btnOk = (e) => {
+    setValid(true)
+    setDimOpen(false)
+    enableBodyScroll(e)
   }
 
   return (
@@ -121,6 +203,7 @@ function Write() {
                   type="text"
                   id="title"
                   ref={inputTitle}
+                  defaultValue={EditState.title !== undefined ? EditState.title : ""}
                   placeholder="제목을 입력해 주세요."
                   className="form__input"/>
               </div>
@@ -166,6 +249,7 @@ function Write() {
                   rows="10"
                   ref={inputContent}
                   placeholder="본문을 입력하세요."
+                  defaultValue={EditState.content !== undefined ? EditState.content : ""}
                   className="form__input"></textarea>
               </div>
             </div>
@@ -175,7 +259,7 @@ function Write() {
                 <div className="form__label-wrap">
                   <div className="form__label">약 복용 여부</div>
                 </div>
-                <label className="form__radio">
+                <label className="form__radio" ref={radioMedicine}>
                   <input
                     type="radio"
                     name="medicine"
@@ -197,7 +281,14 @@ function Write() {
                 </label>
               </div>
               <div className="form__input-wrap">
-                {RadioMedicine === "yes" && <input type="text" id="medicineInput" ref={inputRadioMedicine} placeholder="복용약과 용량을 입력해 주세요. (선택)" className="form__input" />}
+                {RadioMedicine === "yes" &&
+                <input
+                  type="text"
+                  id="medicineInput"
+                  ref={inputRadioMedicine}
+                  defaultValue={EditState.medicineInput !== undefined ? EditState.medicineInput : ""}
+                  placeholder="복용약과 용량을 입력해 주세요. (선택)"
+                  className="form__input" />}
               </div>
             </div>
             {/* 주사 여부 */}
@@ -206,7 +297,7 @@ function Write() {
                 <div className="form__label-wrap">
                   <div className="form__label">주사 여부</div>
                 </div>
-                <label className="form__radio">
+                <label className="form__radio" ref={radioShot}>
                   <input
                     type="radio"
                     name="shot"
@@ -228,7 +319,14 @@ function Write() {
                 </label>
               </div>
               <div className="form__input-wrap">
-                {RadioShot === "yes" && <input type="text" id="shotInput" ref={inputRadioShot} placeholder="메모를 입력해 주세요. (선택)" className="form__input" />}
+                {RadioShot === "yes" &&
+                <input
+                  type="text"
+                  id="shotInput"
+                  ref={inputRadioShot}
+                  defaultValue={EditState.shotInput !== undefined ? EditState.shotInput : ""}
+                  placeholder="메모를 입력해 주세요. (선택)"
+                  className="form__input" />}
               </div>
             </div>
             {/* 사진 첨부
@@ -250,13 +348,15 @@ function Write() {
           </div>
           {/* 버튼 */}
           <div className="form__btn-wrap">
-            <button type="submit" className="form__btn">작성하기</button>
+            <button type="submit" className="form__btn">
+              {EditState.title !== undefined ? "수정" : "작성"}하기
+            </button>
           </div>
-          {!Valid && <Alert type="default" setValid={setValid} setDimOpen={setDimOpen} title="확인해 주세요." content="필수 값을 작성해주세요." />}
+          {!Valid && <Alert type="default" clickHandler={btnOk} title="확인해 주세요." content="필수 값을 작성해주세요." />}
         </form>
       </Layout>
       {WriteComplete && <Alert type="submit" title="확인해 주세요." content="작성이 완료 되었습니다." />}
-      {DimOpen && <Dim setDimOpen={setDimOpen} setValid={setValid}/>}
+      {DimOpen && <Dim setDimOpen={setDimOpen} setDefault={setValid} setSubmit={setValid} setList={WriteComplete} />}
     </>
   )
 }

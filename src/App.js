@@ -2,7 +2,6 @@ import { Route } from "react-router-dom";
 
 // component
 import Header from "./component/common/Header"
-import Nav from "./component/common/Nav"
 
 import Main from "./component/main/Main"
 
@@ -31,8 +30,6 @@ function App() {
 			<Route path="/write" component={Write} />
 			<Route path="/calender" component={Calender} />
 			<Route path="/setting" component={Setting} />
-
-			<Nav />
 		</>
 	);
 }
