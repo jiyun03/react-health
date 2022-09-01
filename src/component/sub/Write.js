@@ -352,10 +352,10 @@ function Write() {
               {EditState.title !== undefined ? "수정" : "작성"}하기
             </button>
           </div>
-          {!Valid && <Alert type="default" clickHandler={btnOk} title="확인해 주세요." content="필수 값을 작성해주세요." />}
+          {!Valid && <Alert type="default" clickHandler={btnOk} title="확인해 주세요" content="필수 값을 작성해주세요." />}
         </form>
       </Layout>
-      {WriteComplete && <Alert type="submit" title="확인해 주세요." content="작성이 완료 되었습니다." />}
+      {WriteComplete && <Alert type="submit" title="확인해 주세요" content="작성이 완료 되었습니다." />}
       {DimOpen && <Dim setDimOpen={setDimOpen} setDefault={setValid} setSubmit={setValid} setList={WriteComplete} />}
     </>
   )

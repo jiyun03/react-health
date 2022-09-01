@@ -109,7 +109,7 @@ function View() {
           </div>
         </div> : <LoadingLayer />}
       </Layout>
-      {DeleteComplete && <Alert type="submit" title="확인해 주세요." content="일지가 삭제 되었습니다." />}
+      {DeleteComplete && <Alert type="submit" title="확인해 주세요" content="일지가 삭제 되었습니다." />}
       {DimOpen && <Dim setDimOpen={setDimOpen} setList={DeleteComplete} />}
     </>
   )
